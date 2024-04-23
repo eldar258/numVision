@@ -34,15 +34,10 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
                 }
               });
             },
-            decoration: InputDecoration(
-              hintText: 'Enter 4 digits',
-            ),
+            decoration: const InputDecoration(hintText: 'Enter 4 digits'),
           ),
-          SizedBox(height: 20),
-          Text(
-            'Search Results:',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+          const SizedBox(height: 20),
+          const Text('Search Results:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
           Expanded(
             child: ListView.builder(
               itemCount: searchResults.length,
@@ -51,9 +46,10 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
                   title: Text(
                       "id:${searchResults[index][0]} list:${searchResults[index][1]}"),
                   onTap: () {
-                    service.removeLine(
-                        searchResults[index][1], searchResults[index][2]);
-                    setState(() {});
+                    setState(() {
+                      service.removeLine(searchResults[index][1], searchResults[index][2]);
+                      searchResults.removeAt(index);
+                    });
                   },
                 );
               },
