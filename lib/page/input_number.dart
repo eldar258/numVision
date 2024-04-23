@@ -17,7 +17,7 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vision'),
+        title: Text('Найти по коду'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,17 +33,17 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
                 }
               });
             },
-            decoration: const InputDecoration(hintText: 'Enter 4 digits'),
+            decoration: const InputDecoration(hintText: 'Введите 4 цифры'),
           ),
           const SizedBox(height: 20),
-          const Text('Search Results:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+          const Text('Результаты поиска:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
           Expanded(
             child: ListView.builder(
               itemCount: searchResults.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                      "id:${searchResults[index][0]} list:${searchResults[index][1]}"),
+                      "id:${searchResults[index][0]} Номер листа:${searchResults[index][1] + 1}"),
                   onTap: () {
                     setState(() {
                       service.removeLine(searchResults[index][1], searchResults[index][2]);

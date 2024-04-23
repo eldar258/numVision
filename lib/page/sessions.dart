@@ -17,7 +17,7 @@ class _Session extends State<Sessions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sessions'),
+        title: Text('Стопки'),
       ),
       body: ListView.builder(
         itemCount: service
@@ -98,7 +98,7 @@ class Session extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Session'),
+        title: Text('Стопка'),
       ),
       body: Center(
         child: Column(
@@ -113,7 +113,7 @@ class Session extends StatelessWidget {
                     )
                 );
               },
-              child: Text('Add'),
+              child: Text('Добавить листы'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -124,7 +124,7 @@ class Session extends StatelessWidget {
                     )
                 );
               },
-              child: Text('Vision'),
+              child: Text('Найти по коду'),
             ),
           ],
         ),

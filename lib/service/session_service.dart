@@ -16,7 +16,7 @@ class SessionService {
 
   newSession() {
     var date = DateTime.now();
-    _sessions.add(Session("${date.day} ${date.month} ${date.hour}:${date.minute}"));
+    _sessions.add(Session("${date.day < 10 ? "0" : ""}${date.day}.${date.month < 10 ? "0" : ""}${date.month} ${date.hour}:${date.minute}"));
   }
 
   removeSession(int sessionIdx) {

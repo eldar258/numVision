@@ -43,7 +43,7 @@ class _CameraAppState extends State<CameraApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add'),
+        title: Text('Добавить листы'),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
