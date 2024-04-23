@@ -53,6 +53,7 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
                   onTap: () {
                     service.removeLine(
                         searchResults[index][1], searchResults[index][2]);
+                    setState(() {});
                   },
                 );
               },
