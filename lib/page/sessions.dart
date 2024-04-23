@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_drive/page/camera_page.dart' as camera;
+import 'package:test_drive/page/input_number.dart';
 
 import '../service/session_service.dart';
 
@@ -30,6 +31,7 @@ class _Session extends State<Sessions> {
                 setState(() {});
               },
               onOpenPressed: () {
+                service.setCurrent(index);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -108,7 +110,14 @@ class Session extends StatelessWidget {
               child: Text('Add'),
             ),
             ElevatedButton(
-              onPressed: () => {}, //TODO input_number widget
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NumberSearchPage()
+                    )
+                );
+              },
               child: Text('Vision'),
             ),
           ],
