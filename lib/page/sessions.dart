@@ -38,7 +38,8 @@ class _Session extends State<Sessions> {
                         builder: (context) => const Session()
                     )
                 );
-              }
+              },
+            onReversePressed: service.reverseCurrent(),
           );
         },
       ),
@@ -57,11 +58,12 @@ class ItemWidget extends StatelessWidget {
   final String date;
   final Function onDeletePressed;
   final Function onOpenPressed;
+  final Function onReversePressed;
 
   const ItemWidget({super.key,
     required this.date,
     required this.onDeletePressed,
-    required this.onOpenPressed,
+    required this.onOpenPressed, required this.onReversePressed,
   });
 
   @override
@@ -74,6 +76,10 @@ class ItemWidget extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.delete, color: Colors.red),
             onPressed: () => onDeletePressed(),
+          ),
+          IconButton(
+            icon: Icon(Icons.abc_sharp),
+            onPressed: () => onReversePressed(),
           ),
           IconButton(
             icon: Icon(Icons.open_in_new),

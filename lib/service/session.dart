@@ -2,7 +2,7 @@ import 'package:test_drive/service/page.dart';
 
 class Session {
   final String date;
-  final _pages = <Page>[];
+  late List<Page> _pages = <Page>[];
 
   Session(this.date);
 
@@ -26,5 +26,9 @@ class Session {
     if (_pages[pageIdx].isEmpty()) {
       _pages.removeAt(pageIdx);
     }
+  }
+
+  void reverse() {
+    _pages = _pages.reversed.toList();
   }
 }

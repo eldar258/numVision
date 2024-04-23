@@ -38,4 +38,8 @@ class SessionService {
   removeLine(int pageIdx, int lineIdx) {
     _currentSession.removeLine(pageIdx, lineIdx);
   }
+
+  reverseCurrent() {
+    _currentSession.reverse();
+  }
 }
