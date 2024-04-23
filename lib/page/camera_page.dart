@@ -4,17 +4,13 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:flutter/material.dart';
 import 'package:test_drive/service/session_service.dart';
 
-import '../service/session_service.dart';
-
 late List<CameraDescription> _cameras;
 
 void init() async {
   _cameras = await availableCameras();
 }
 
-/// CameraApp is the Main Application.
 class CameraApp extends StatefulWidget {
-  /// Default Constructor
   const CameraApp({super.key});
 
   @override
@@ -45,44 +41,49 @@ class _CameraAppState extends State<CameraApp> {
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: _initializeControllerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Stack(
-            children: [
-              Positioned.fill(child: CameraPreview(_controller)),
-              if (_isProcessing) Center(child: CircularProgressIndicator()),
-              if (_detectedText.isNotEmpty)
-                Positioned(
-                  top: 16.0,
-                  left: 16.0,
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    color: Colors.black54,
-                    child: Text(
-                      _detectedText,
-                      style: TextStyle(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add'),
+      ),
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Stack(
+              children: [
+                Positioned.fill(child: CameraPreview(_controller)),
+                if (_isProcessing) Center(child: CircularProgressIndicator()),
+                if (_detectedText.isNotEmpty)
+                  Positioned(
+                    top: 16.0,
+                    left: 16.0,
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      color: Colors.black54,
+                      child: Text(
+                        _detectedText,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
+                Positioned(
+                  bottom: 16.0,
+                  left: 16.0,
+                  right: 16.0,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        service.addPairs(_pairs);
+                      },
+                      child: const Icon(Icons.camera_alt)// Icon(Icons.camera),
+                  ),
                 ),
-              Positioned(
-                bottom: 16.0,
-                left: 16.0,
-                right: 16.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    service.addPairs(_pairs);
-                  },
-                  child: const Icon(Icons.camera_alt)// Icon(Icons.camera),
-                ),
-              ),
-            ],
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+              ],
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 
