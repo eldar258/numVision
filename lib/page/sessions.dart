@@ -39,7 +39,7 @@ class _Session extends State<Sessions> {
                     )
                 );
               },
-            onReversePressed: service.reverseCurrent(),
+            onReversePressed: service.reverseCurrent,
           );
         },
       ),
@@ -78,7 +78,7 @@ class ItemWidget extends StatelessWidget {
             onPressed: () => onDeletePressed(),
           ),
           IconButton(
-            icon: Icon(Icons.abc_sharp),
+            icon: Icon(Icons.cached),
             onPressed: () => onReversePressed(),
           ),
           IconButton(
