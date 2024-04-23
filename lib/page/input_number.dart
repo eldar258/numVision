@@ -48,9 +48,11 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
               itemCount: searchResults.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text("id:${searchResults[index][0]} list:${searchResults[index][1]}"),
+                  title: Text(
+                      "id:${searchResults[index][0]} list:${searchResults[index][1]}"),
                   onTap: () {
-                    service.removeLine(searchResults[index][1], searchResults[index][2]);
+                    service.removeLine(
+                        searchResults[index][1], searchResults[index][2]);
                   },
                 );
               },
