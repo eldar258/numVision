@@ -48,6 +48,7 @@ class _Session extends State<Sessions> with WidgetsBindingObserver {
         itemBuilder: (context, index) {
           return ItemWidget(
               name: service.getSessionName(index),
+              count: service.getSession(index).getLength(),
               onChangeName: (String newName) {
                 service.changeNameSession(newName, index);
                 setState(() {});
@@ -82,6 +83,7 @@ class _Session extends State<Sessions> with WidgetsBindingObserver {
 
 class ItemWidget extends StatelessWidget {
   final String name;
+  final int count;
   final Function onChangeName;
   final Function onDeletePressed;
   final Function onOpenPressed;
@@ -89,6 +91,7 @@ class ItemWidget extends StatelessWidget {
 
   const ItemWidget({super.key,
     required this.name,
+    required this.count,
     required this.onChangeName,
     required this.onDeletePressed,
     required this.onOpenPressed, required this.onReversePressed,
@@ -104,6 +107,7 @@ class ItemWidget extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text("[$count]", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),),
           IconButton(
             icon: Icon(Icons.delete, color: Colors.red),
             onPressed: () => onDeletePressed(),

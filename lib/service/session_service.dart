@@ -85,4 +85,8 @@ class SessionService {
   String getPageToString(int index) {
     return _currentSession.getPageToString(index);
   }
+
+  Session getSession(int index) {
+    return _sessions[index];
+  }
 }
