@@ -168,10 +168,7 @@ class _CameraAppState extends State<CameraApp> {
     setState(() {_isProcessing = true;});
     final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
     final RecognizedText recognisedText = await textRecognizer.processImage(InputImage.fromFilePath(inputImage.path));
-
-
     var detectedText = detectText(recognisedText.blocks);
-
     setState(() {
       _isProcessing = false;
       _detectedText = detectedText;
@@ -194,8 +191,7 @@ class _CameraAppState extends State<CameraApp> {
     _pairs = pairs;
     String res = "";
     for (List<String> pair in pairs) {
-      res += "id:${pair.first} code:${pair.last}";
-      res += "\n";
+      res += "code:${pair.last}\n";//"id:${pair.first} code:${pair.last}\n";
     }
     return res;
   }

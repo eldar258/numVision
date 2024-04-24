@@ -43,7 +43,7 @@ class _NumberSearchPageState extends State<NumberSearchPage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                      "id:${searchResults[index][0]} Номер листа:${searchResults[index][1] + 1}"),
+                      "Номер листа:${searchResults[index][1] + 1}"),//"id:${searchResults[index][0]} Номер листа:${searchResults[index][1] + 1}"),
                   onTap: () {
                     setState(() {
                       service.removeLine(searchResults[index][1], searchResults[index][2]);
