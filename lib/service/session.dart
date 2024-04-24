@@ -7,8 +7,16 @@ class Session {
   Session(this.name);
   Session.fromPages(this.name, this._pages);
 
-  void addPairs(List<List<String>> pairs) {
-    _pages.add(Page(pairs));
+  void addPairs(List<List<String>> pairs, int index) {
+    if (index == _pages.length) {
+      _pages.add(Page(pairs));
+    } else {
+      _pages[index] = Page(pairs);
+    }
+  }
+
+  int getLength() {
+    return _pages.length;
   }
 
   List<List<int>> search(int code) {

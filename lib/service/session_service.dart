@@ -32,12 +32,16 @@ class SessionService {
     _sessions.removeAt(sessionIdx);
   }
 
+  Session getCurrent() {
+    return _currentSession;
+}
+
   setCurrent(int sessionIdx) {
     _currentSession = _sessions[sessionIdx];
   }
 
-  addPairs(List<List<String>> pairs) {
-    _currentSession.addPairs(pairs);
+  addPairs(List<List<String>> pairs, int index) {
+    _currentSession.addPairs(pairs, index);
   }
 
   List<List<int>> search(int code) {

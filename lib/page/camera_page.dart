@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:flutter/material.dart';
 import 'package:test_drive/service/session_service.dart';
@@ -18,6 +19,8 @@ class CameraApp extends StatefulWidget {
 }
 
 class _CameraAppState extends State<CameraApp> {
+  int length = service.getCurrent().getLength();
+  int curIndex = service.getCurrent().getLength();
   late CameraController _controller;
   Future<void>? _initializeControllerFuture;
   bool _isProcessing = false;
@@ -43,7 +46,7 @@ class _CameraAppState extends State<CameraApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Добавить листы'),
+        title: Text("Лист: ${curIndex + 1}"),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -70,13 +73,40 @@ class _CameraAppState extends State<CameraApp> {
                   bottom: 16.0,
                   left: 16.0,
                   right: 16.0,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        service.addPairs(_pairs);
-                      },
-                      child: const Icon(Icons.camera_alt)// Icon(Icons.camera),
-                  ),
+                  child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            curIndex = (curIndex + length) % (length + 1);
+                          });
+                        },
+                        child: const Icon(Icons.arrow_left)// Icon(Icons.camera),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            service.addPairs(_pairs, curIndex);
+                            curIndex++;
+                            length = service.getCurrent().getLength();
+                          });
+                        },
+                        child: const Icon(Icons.camera_alt)// Icon(Icons.camera),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            curIndex = (curIndex + 1) % (length + 1);
+                          });
+                        },
+                        child: const Icon(Icons.arrow_right)// Icon(Icons.camera),
+                    ),
+                  ],
                 ),
+                )
               ],
             );
           } else {

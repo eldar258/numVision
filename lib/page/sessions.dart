@@ -164,7 +164,7 @@ class Session extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Стопка'),
+        title: Text(service.getCurrent().name),
       ),
       body: Center(
         child: Column(
