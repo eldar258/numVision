@@ -26,7 +26,7 @@ class _CameraAppState extends State<CameraApp> {
   bool _isProcessing = false;
   String _detectedText = '';
   late Timer timer;
-  late List<List<String>> _pairs;
+  List<List<String>>? _pairs;
 
   @override
   void initState() {
@@ -96,6 +96,7 @@ class _CameraAppState extends State<CameraApp> {
                         onPressed: () {
                           setState(() {
                             curIndex = (curIndex + length) % (length + 1);
+                            cleanText();
                           });
                         },
                         child: const Icon(Icons.arrow_left)// Icon(Icons.camera),
@@ -103,13 +104,24 @@ class _CameraAppState extends State<CameraApp> {
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(padding: EdgeInsets.all(15)),
                         onPressed: () {
+                          if (_pairs == null) return;
                           setState(() {
-                            service.addPairs(_pairs, curIndex);
+                            service.addPairs(_pairs!, curIndex);
                             if (curIndex == length) {
                               curIndex++;
                             }
                             length = service.getCurrent().getLength();
+                            cleanText();
                           });
+                          /*
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Сохранено'),
+                                showCloseIcon: true,
+                                duration: Duration(milliseconds: 500),
+                              )
+                          );
+                           */
                         },
                         child: const Icon(Icons.camera_alt)// Icon(Icons.camera),
                     ),
@@ -118,6 +130,7 @@ class _CameraAppState extends State<CameraApp> {
                         onPressed: () {
                           setState(() {
                             curIndex = (curIndex + 1) % (length + 1);
+                            cleanText();
                           });
                         },
                         child: const Icon(Icons.arrow_right)// Icon(Icons.camera),
@@ -194,5 +207,10 @@ class _CameraAppState extends State<CameraApp> {
       res += "code:${pair.last}\n";//"id:${pair.first} code:${pair.last}\n";
     }
     return res;
+  }
+
+  void cleanText() {
+    _pairs = null;
+    _detectedText = "";
   }
 }
