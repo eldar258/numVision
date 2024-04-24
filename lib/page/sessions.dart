@@ -48,6 +48,10 @@ class _Session extends State<Sessions> with WidgetsBindingObserver {
         itemBuilder: (context, index) {
           return ItemWidget(
               name: service.getSessionName(index),
+              onChangeName: (String newName) {
+                service.changeNameSession(newName, index);
+                setState(() {});
+              },
               onDeletePressed: () {
                 service.removeSession(index);
                 setState(() {});
@@ -78,12 +82,14 @@ class _Session extends State<Sessions> with WidgetsBindingObserver {
 
 class ItemWidget extends StatelessWidget {
   final String name;
+  final Function onChangeName;
   final Function onDeletePressed;
   final Function onOpenPressed;
   final Function onReversePressed;
 
   const ItemWidget({super.key,
     required this.name,
+    required this.onChangeName,
     required this.onDeletePressed,
     required this.onOpenPressed, required this.onReversePressed,
   });
@@ -92,6 +98,9 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(name),
+      onTap: () {
+        _showEditDialog(context);
+      },
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -110,6 +119,41 @@ class ItemWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showEditDialog(BuildContext context) async {
+    String? newText = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        TextEditingController textEditingController = TextEditingController(text: name);
+        textEditingController.selection = TextSelection(baseOffset: 0, extentOffset: name.length);
+        return AlertDialog(
+          alignment: Alignment.topCenter,
+          title: Text('Введите новое имя стопки'),
+          content: TextField(
+            controller: textEditingController,
+            autofocus: true,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Отмена'),
+              onPressed: () {
+                Navigator.of(context).pop(null);
+              },
+            ),
+            TextButton(
+              child: Text('Сохранить'),
+              onPressed: () {
+                Navigator.of(context).pop(textEditingController.text);
+              },
+            ),
+          ],
+        );
+      },
+    );
+    if (newText != null) {
+      onChangeName(newText);
+    }
   }
 }
 

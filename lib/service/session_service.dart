@@ -24,6 +24,10 @@ class SessionService {
     _sessions.add(Session("${date.day < 10 ? "0" : ""}${date.day}.${date.month < 10 ? "0" : ""}${date.month} ${date.hour}:${date.minute}"));
   }
 
+  changeNameSession(String newName, int index) {
+    _sessions[index].name = newName;
+  }
+
   removeSession(int sessionIdx) {
     _sessions.removeAt(sessionIdx);
   }

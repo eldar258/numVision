@@ -1,7 +1,7 @@
 import 'package:test_drive/service/page.dart';
 
 class Session {
-  final String name;
+  String name;
   late List<Page> _pages = <Page>[];
 
   Session(this.name);
