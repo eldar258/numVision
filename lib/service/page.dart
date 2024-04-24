@@ -40,6 +40,15 @@ class Page {
   factory Page.fromJson(Map<String, dynamic> json) {
     return Page.fromLines((json['lines'] as List).map((lineJson) => Line.fromJson(lineJson)).toList());
   }
+
+  @override
+  String toString() {
+    String res = "";
+    for (var i = 0; i < _lines.length; i++) {
+      res += "${_lines[i].code}\n";
+    }
+    return res;
+  }
 }
 
 class Line {

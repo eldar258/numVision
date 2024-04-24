@@ -69,6 +69,19 @@ class _CameraAppState extends State<CameraApp> {
                       ),
                     ),
                   ),
+                if (curIndex != length)
+                  Positioned(
+                    top: 16.0,
+                    right: 16.0,
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      color: Colors.black54,
+                      child: Text(
+                        service.getPageToString(curIndex),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 Positioned(
                   bottom: 16.0,
                   left: 16.0,
@@ -90,7 +103,9 @@ class _CameraAppState extends State<CameraApp> {
                         onPressed: () {
                           setState(() {
                             service.addPairs(_pairs, curIndex);
-                            curIndex++;
+                            if (curIndex == length) {
+                              curIndex++;
+                            }
                             length = service.getCurrent().getLength();
                           });
                         },

@@ -51,4 +51,8 @@ class Session {
   factory Session.fromJson(Map<String, dynamic> json) {
     return Session.fromPages(json['name'], (json['pages'] as List).map((pageJson) => Page.fromJson(pageJson)).toList());
   }
+
+  String getPageToString(int index) {
+    return _pages[index].toString();
+  }
 }
