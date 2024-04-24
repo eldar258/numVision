@@ -1,18 +1,19 @@
-
 class Page {
-  final _numbers = <_Line>[];
+  var _lines = <Line>[];
   final _regex = RegExp(r'\d+');
 
   Page(List<List<String>> pairs) {
-    for (var el in pairs) {_numbers.add(_Line(toInt(el.first), toInt(el.last)));}
+    for (var el in pairs) {_lines.add(Line(toInt(el.first), toInt(el.last)));}
   }
 
+  Page.fromLines(this._lines);
+
   bool isEmpty() {
-    return _numbers.isEmpty;
+    return _lines.isEmpty;
   }
 
   remove(int idx) {
-    _numbers.removeAt(idx);
+    _lines.removeAt(idx);
   }
 
   int toInt(String str) {
@@ -22,18 +23,39 @@ class Page {
 
   List<List<int>> search(int code) {
     List<List<int>> res = [];
-    for (int i = 0; i < _numbers.length; i++) {
-      if (_numbers[i].code == code) {
-        res.add([_numbers[i].id, i]);
+    for (int i = 0; i < _lines.length; i++) {
+      if (_lines[i].code == code) {
+        res.add([_lines[i].id, i]);
       }
     }
     return res;
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'lines': _lines.map((line) => line.toJson()).toList(),
+    };
+  }
+
+  factory Page.fromJson(Map<String, dynamic> json) {
+    return Page.fromLines((json['lines'] as List).map((lineJson) => Line.fromJson(lineJson)).toList());
+  }
 }
 
-class _Line {
+class Line {
   int id;
   int code;
 
-  _Line(this.id, this.code);
+  Line(this.id, this.code);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'code': code,
+    };
+  }
+
+  factory Line.fromJson(Map<String, dynamic> json) {
+    return Line((json['id'] as int), json['code']);
+  }
 }

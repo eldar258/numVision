@@ -1,10 +1,11 @@
 import 'package:test_drive/service/page.dart';
 
 class Session {
-  final String date;
+  final String name;
   late List<Page> _pages = <Page>[];
 
-  Session(this.date);
+  Session(this.name);
+  Session.fromPages(this.name, this._pages);
 
   void addPairs(List<List<String>> pairs) {
     _pages.add(Page(pairs));
@@ -30,5 +31,16 @@ class Session {
 
   void reverse() {
     _pages = _pages.reversed.toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'pages': _pages.map((page) => page.toJson()).toList(),
+    };
+  }
+
+  factory Session.fromJson(Map<String, dynamic> json) {
+    return Session.fromPages(json['name'], (json['pages'] as List).map((pageJson) => Page.fromJson(pageJson)).toList());
   }
 }
