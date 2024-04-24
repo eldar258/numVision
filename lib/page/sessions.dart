@@ -91,7 +91,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text(name),
+      title: Text(name),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
