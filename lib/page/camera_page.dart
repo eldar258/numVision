@@ -65,7 +65,7 @@ class _CameraAppState extends State<CameraApp> {
                       color: Colors.black54,
                       child: Text(
                         _detectedText,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -75,10 +75,10 @@ class _CameraAppState extends State<CameraApp> {
                     right: 16.0,
                     child: Container(
                       padding: EdgeInsets.all(8.0),
-                      color: Colors.black54,
+                      color: Colors.white54,
                       child: Text(
                         service.getPageToString(curIndex),
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -87,11 +87,12 @@ class _CameraAppState extends State<CameraApp> {
                   left: 16.0,
                   right: 16.0,
                   child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(minimumSize: Size(100, 50)),
                         onPressed: () {
                           setState(() {
                             curIndex = (curIndex + length) % (length + 1);
@@ -100,6 +101,7 @@ class _CameraAppState extends State<CameraApp> {
                         child: const Icon(Icons.arrow_left)// Icon(Icons.camera),
                     ),
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(padding: EdgeInsets.all(15)),
                         onPressed: () {
                           setState(() {
                             service.addPairs(_pairs, curIndex);
@@ -112,6 +114,7 @@ class _CameraAppState extends State<CameraApp> {
                         child: const Icon(Icons.camera_alt)// Icon(Icons.camera),
                     ),
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(minimumSize: Size(100, 50)),
                         onPressed: () {
                           setState(() {
                             curIndex = (curIndex + 1) % (length + 1);
