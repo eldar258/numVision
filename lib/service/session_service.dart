@@ -15,7 +15,7 @@ class SessionService {
     return _sessions;
   }
 
-  String getSessionDate(int sessionIdx) {
+  String getSessionName(int sessionIdx) {
     return _sessions[sessionIdx].name;
   }
 

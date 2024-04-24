@@ -47,7 +47,7 @@ class _Session extends State<Sessions> with WidgetsBindingObserver {
             .length,
         itemBuilder: (context, index) {
           return ItemWidget(
-              date: service.getSessionDate(index),
+              name: service.getSessionName(index),
               onDeletePressed: () {
                 service.removeSession(index);
                 setState(() {});
@@ -77,13 +77,13 @@ class _Session extends State<Sessions> with WidgetsBindingObserver {
 }
 
 class ItemWidget extends StatelessWidget {
-  final String date;
+  final String name;
   final Function onDeletePressed;
   final Function onOpenPressed;
   final Function onReversePressed;
 
   const ItemWidget({super.key,
-    required this.date,
+    required this.name,
     required this.onDeletePressed,
     required this.onOpenPressed, required this.onReversePressed,
   });
@@ -91,7 +91,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text(date),
+      leading: Text(name),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
